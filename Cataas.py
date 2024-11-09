@@ -19,11 +19,15 @@ def load_image(url):
         return None
 
 
-def set_image():
+def open_new_window():
     img = load_image(url)
 
     if img:
-        label.config(image=img)
+        new_widow = Toplevel()
+        new_widow.title('Картинка с котиком')
+        new_widow.geometry('600x480')
+        label = Label(new_widow, image=img)
+        label.pack()
         label.image = img
 
 def exit():
@@ -33,8 +37,7 @@ window = Tk()
 window.title('Cats!')
 window.geometry('600x480')
 
-label = Label()
-label.pack()
+
 
 # update_button = Button(text = 'Обновить', command=set_image)
 # update_button.pack()
