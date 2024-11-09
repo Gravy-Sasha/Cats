@@ -1,13 +1,20 @@
-from cProfile import label
+from io import BytesIO
 from tkinter import *
 from tkinter import Label
-
-from PIL import Image, ImageTk
 import requests
-from io import BytesIO
+from PIL import ImageTk
 
-from Scripts.Tkinter_menu import window
-from pygame.examples.sprite_texture import load_img
+
+def load_image():
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        image_data = BytesIO(response.content)
+        img = Image.open(image_data)
+        return ImageTk.PhotoImage(img)
+    except Exception as e:
+        print(f'Произошла ошибка: {e}')
+        return None
 
 window = Tk()
 window.title('Cats!')
